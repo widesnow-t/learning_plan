@@ -76,9 +76,9 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
                             <?php else : ?>
                                 <th><?= h(date('Y/m/d', strtotime($comp['due_date']))) ?></th>
                             <?php endif ?>
-                            <th><a href="" class="btn done-btn">完了</a></th>
+                            <th><a href="done.php?id=<?= h($comp['id']) ?>" class="btn done-btn">完了</a></th>
                             <th><a href="edit.php?id=<?= h($comp['id']) ?>" class="btn edit-btn">編集</a></th>
-                            <th><a href="" class="btn delete-btn">削除</a></th>
+                            <th><a href="delete.php?id=<?= h($comp['id']) ?>" class="btn delete-btn">削除</a></th>
                         <?php endforeach; ?>
                         <!-- 未完了のデータを表示 -->
 
@@ -103,9 +103,9 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
                         <tr>
                             <th><?= h($letion['title']) ?></th>
                             <th><?= h(date('Y/m/d', strtotime($letion['due_date']))) ?></th>
-                            <th><a href="" class="btn cancel-btn">未完了</a></th>
-                            <th><a href="" class="btn edit-btn">編集</a></th>
-                            <th><a href="" class="btn delete-btn">削除</a></th>
+                            <th><a href="done_cancel.php?id=<?= h($letion['id']) ?>" class="btn cancel-btn">未完了</a></th>
+                            <th><a href="edit.php?id=<?= h($letion['id']) ?>" class="btn edit-btn">編集</a></th>
+                            <th><a href="delete.php?id=<?= h($letion['id']) ?>" class="btn delete-btn">削除</a></th>
 
                         <?php endforeach; ?>
 

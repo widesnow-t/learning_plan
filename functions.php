@@ -206,3 +206,70 @@ function findById($id)
     // 結果の取得
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+//タスク削除
+function deletePlan($id)
+{
+    // データベースに接続
+    $dbh = connectDb();
+
+    // $id を使用してデータを削除
+    $sql = <<<EOM
+    DELETE FROM
+        plans
+    WHERE
+        id = :id
+    EOM;
+
+    // プリペアドステートメントの準備
+    $stmt = $dbh->prepare($sql);
+
+    // パラメータのバインド
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // プリペアドステートメントの実行
+    $stmt->execute();
+}
+function updatePlanCompLetion($id)
+{  // データベースに接続
+    $dbh = connectDb();
+    // $id を使用してデータを更新
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = CURDATE()
+    WHERE
+        id = :id
+    EOM;
+
+    // プリペアドステートメントの準備
+    $stmt = $dbh->prepare($sql);
+
+    // パラメータのバインド
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // プリペアドステートメントの実行
+    $stmt->execute();
+}
+function updateCompLetiondate($id)
+{  // データベースに接続
+    $dbh = connectDb();
+    // $id を使用してデータを更新
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = NULL
+    WHERE
+        id = :id
+    EOM;
+
+    // プリペアドステートメントの準備
+    $stmt = $dbh->prepare($sql);
+
+    // パラメータのバインド
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // プリペアドステートメントの実行
+    $stmt->execute();
+}
