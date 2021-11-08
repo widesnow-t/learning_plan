@@ -1,0 +1,134 @@
+@charset "UTF-8";
+/*共通部分
+-----------------------------------------------*/
+html {
+    font-size: 100%;
+
+}
+body {
+    font-family: 'M PLUS Rounded 1c', sans-serif;
+    min-height: 100vh;
+    background:linear-gradient(#0509ff,#0cd5e7);
+}
+.title {
+    text-align: center;
+    margin-bottom: 30px;
+    color: mintcream;
+}
+.wrapper {
+    width: 100%;
+}
+.errors {
+    color: red;
+    background-color: #f1d5ef;
+    list-style: none;
+    margin: 20px 0;
+    padding: 10px 20px;
+    border-radius: 10px;
+
+}
+/*フォーム
+-----------------------------------*/
+.form-area {
+    background-color: #ebf0f1;
+    padding: 40px;
+    margin-bottom: 50px;
+    width: 90%;
+    margin: 30px;
+    border-radius:10px;
+}
+
+input[type="text"] {
+    border: 1px solid #b8b4b4;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+}
+input[type="date"]{
+    border: 1px solid #b8b4b4;
+    border-radius: 3px;
+    width: 100%;
+    padding: 10px;
+}
+/*ボタン*/
+.submit-btn{
+    background-color: #eb43d5;
+    width: 100%;
+    margin-top: 20px;
+    padding: 5px 0;
+    letter-spacing: 1.5rem;
+    text-indent: 1.5rem;
+    border-radius:10px;
+}
+.addition-btn{
+    background-color: #4362eb;
+    display: block;
+    width: 100%;
+    margin-top: 20px;
+    padding: 5px 0;
+    letter-spacing: 1.5rem;
+    text-indent: 1.5rem;
+    border-radius:10px;
+    text-decoration: none;
+}
+.btn {
+    color: #fff;
+    border-radius: 5px;
+    text-align: center;
+}
+.btn:hover {
+    background-color:#93d8d0;
+}
+.done-btn,
+.edit-btn,
+.delete-btn,
+.cancel-btn {
+    width: 120%;
+    font-size: 0.9rem;
+    margin-right: 3px;
+    padding: 8px;
+    text-decoration: none;
+}
+.done-btn {
+    background-color: #292ccd;
+}
+.edit-btn {
+    background-color: rgb(47, 147, 240);
+}
+.delete-btn {
+    background-color: #f96262;
+}
+.cancel-btn{
+    background-color: rgb(47, 240, 73);
+}
+/*未達成*/
+.incomplete-area {
+    background-color: #ebf0f1;
+    padding: 40px;
+    margin-bottom: 50px;
+    width: 90%;
+    margin: 30px;
+    border-radius:10px;
+}
+.sub-title {
+    text-align: center;
+    margin-bottom: 30px;
+}
+.plan-list {
+    width: 100%;
+    border-collapse: separate;
+    border: none;
+    border-spacing: 10px;
+}
+.expired {
+    color: red;
+}
+/*完了*/
+.complete-area {
+    background-color: #ebf0f1;
+    padding: 40px;
+    margin-bottom: 50px;
+    width: 90%;
+    margin: 30px;
+    border-radius:10px;
+}
