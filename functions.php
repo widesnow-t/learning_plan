@@ -229,7 +229,7 @@ function deletePlan($id)
     // プリペアドステートメントの実行
     $stmt->execute();
 }
-function updatePlanCompLetion($id)
+function updatePlanDone($id)
 {  // データベースに接続
     $dbh = connectDb();
     // $id を使用してデータを更新
@@ -251,7 +251,7 @@ function updatePlanCompLetion($id)
     // プリペアドステートメントの実行
     $stmt->execute();
 }
-function updateCompLetiondate($id)
+function updatePlanDoneCancel($id)
 {  // データベースに接続
     $dbh = connectDb();
     // $id を使用してデータを更新
