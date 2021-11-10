@@ -61,7 +61,7 @@ function findCompLetion($completion_date)
         plans
     WHERE 
         completion_date IS NOT NULL
-    ORDER BY due_date DESC
+    ORDER BY completion_date DESC
 
     EOM;
 
@@ -237,7 +237,7 @@ function updatePlanDone($id)
     UPDATE
         plans
     SET
-        completion_date = CURDATE()
+        completion_date = NOW()
     WHERE
         id = :id
     EOM;

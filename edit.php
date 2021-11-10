@@ -48,6 +48,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="wrapper">
         <h1 class="title">学習管理アプリ</h1>
         <div class="form-area">
+            <h2 class="sub-title">編 集</h2>
+            <hr>
             <!-- エラー表示 -->
             <?php if ($errors) echo (createErrMsg($errors)) ?>
             <form action="" method="post">

@@ -8,15 +8,16 @@ html {
 body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     min-height: 100vh;
-    background:linear-gradient(#0509ff,#0cd5e7);
+    background:linear-gradient(#5638da,#3da8f0);
 }
 .title {
     text-align: center;
-    margin-bottom: 30px;
     color: mintcream;
 }
 .wrapper {
     width: 100%;
+    margin: 30px auto;
+    padding: 0 4%;
 }
 .errors {
     color: red;
@@ -31,10 +32,9 @@ body {
 -----------------------------------*/
 .form-area {
     background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
+    padding: 15px 30px;
+    width: 80%;
+    margin: 0 auto;
     border-radius:10px;
 }
 
@@ -50,18 +50,20 @@ input[type="date"]{
     width: 100%;
     padding: 10px;
 }
+
 /*ボタン*/
 .submit-btn{
-    background-color: #eb43d5;
+    background-color: #f200ff;
     width: 100%;
     margin-top: 20px;
     padding: 5px 0;
     letter-spacing: 1.5rem;
     text-indent: 1.5rem;
     border-radius:10px;
+    font-size: 20px;
 }
 .addition-btn{
-    background-color: #4362eb;
+    background-color: #0000ed;
     display: block;
     width: 100%;
     margin-top: 20px;
@@ -70,6 +72,7 @@ input[type="date"]{
     text-indent: 1.5rem;
     border-radius:10px;
     text-decoration: none;
+    font-size: 20px;
 }
 .btn {
     color: #fff;
@@ -77,37 +80,65 @@ input[type="date"]{
     text-align: center;
 }
 .btn:hover {
-    background-color:#93d8d0;
+    opacity: 0.5;
 }
 .done-btn,
 .edit-btn,
-.delete-btn,
-.cancel-btn {
-    width: 120%;
-    font-size: 0.9rem;
-    margin-right: 3px;
-    padding: 8px;
+.delete-btn
+{
+    font-size: 1.5rem;
+    font-weight:lighter;
+    width: 100%;
     text-decoration: none;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    padding: 10px 30px;
+    display: flex;
+    justify-content: center;
 }
 .done-btn {
-    background-color: #292ccd;
+    background-color: #0047e1;
 }
-.edit-btn {
-    background-color: rgb(47, 147, 240);
+.edit-btn, 
+.cancel-edit-btn {
+    background-color: #ef7800;
 }
-.delete-btn {
-    background-color: #f96262;
+.delete-btn, 
+.cancel-delete-btn {
+    background-color: #f24343;
 }
 .cancel-btn{
-    background-color: rgb(47, 240, 73);
+    background-color: #00d400;
+    font-size: 1.5rem;
+    font-weight:lighter;
+    width: 100%;
+    text-decoration: none;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    padding: 10px 1px;
+    display: flex;
+    justify-content: center;
+}
+.cancel-edit-btn, 
+.cancel-delete-btn {
+    font-size: 1.5rem;
+    font-weight:lighter;
+    width: 100%;
+    text-decoration: none;
+    margin-right: 3px;
+    margin-bottom: 5px;
+    padding: 10px 15px;
+    display: flex;
+    justify-content: center;
 }
 /*未達成*/
-.incomplete-area {
+.incomplete-area
+{
     background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
+    padding: 20px;
+    width: 80%;
+    margin: 10px auto;
+    margin-top: 15px;
     border-radius:10px;
 }
 .sub-title {
@@ -116,19 +147,27 @@ input[type="date"]{
 }
 .plan-list {
     width: 100%;
-    border-collapse: separate;
-    border: none;
-    border-spacing: 10px;
+    margin: 0 auto;
+}
+.plan-title {
+    text-align: left;
+}
+.plan-due-date {
+    text-align: left;
+}
+.plan-completion-date {
+    text-align: left;
 }
 .expired {
     color: red;
+    text-align: left;
 }
 /*完了*/
 .complete-area {
     background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
-    border-radius:10px;
+    padding: 20px;
+    width: 80%;
+    margin: 10px auto;
+    margin-top: 15px;
+    border-radius: 10px;
 }
