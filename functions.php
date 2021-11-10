@@ -53,7 +53,7 @@ function dateRed($due_date)
 {
     $ym = '';
     if (date('Y-m-d') >= $due_date) {
-        $ym = 'class = "expired"';
+        $ym = 'class="expired"';
     }
     return $ym;
 }
