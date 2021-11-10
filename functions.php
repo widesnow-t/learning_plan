@@ -25,7 +25,7 @@ function h($str)
     return htmlspecialchars($str, ENT_QUOTES, 'UTF-8');
 }
 //未達成データ取得
-function findCompletion_Date($completion_date)
+function findCompletion_Date()
 {
     $dbh = connectDb();
 
@@ -49,8 +49,16 @@ function findCompletion_Date($completion_date)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+function daTeRed($due_date)
+{
+    $ym = '';
+    if (date('Y-m-d') >= $due_date) {
+        $ym = 'class = "expired"';
+    }
+    return $ym;
+}
 //達成データ取得
-function findCompLetion($completion_date)
+function findCompLetion()
 {
     $dbh = connectDb();
 
@@ -61,7 +69,7 @@ function findCompLetion($completion_date)
         plans
     WHERE 
         completion_date IS NOT NULL
-    ORDER BY completion_date DESC
+    ORDER BY due_date DESC
 
     EOM;
 
@@ -92,56 +100,26 @@ function validateRequired($title, $due_date)
 }
 
 //同じ登録がないかチェック
-function validateSameMeasDate($title)
+function validateSameMeasDate($title, $due_date, $plan)
 {
-    $dbh = connectDb();
-
-    $sql = <<<EOM
-    SELECT
-        *
-    FROM
-        plans
-    WHERE
-        title = :title
-    EOM;
-
-    $stmt = $dbh->prepare($sql);
-    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-    $stmt->execute();
-    $bt = $stmt->fetch(PDO::FETCH_ASSOC);
-
     $errors = [];
 
-    if ($bt) {
+    // バリデーション
+    if ($title == '') {
+        $errors[] = MSG_MEAS_DATE_REQUIRED;
+    }
+    if ($due_date == '') {
+        $errors[] = MSG_BODY_TEMP_REQUIRED;
+    }
+
+    if (
+        $title == $plan['title'] &&
+        $due_date == $plan['due_date']){
         $errors[] = MSG_MEAS_DATE_SAME;
     }
 
     return $errors;
 }
-//タスク更新
-function updatePlan($id, $title, $due_date)
-{
-    $dbh = connectDb();
-
-    $sql = <<<EOM
-    UPDATE
-        plans
-    SET 
-        title = :title,
-        due_date = :due_date
-    WHERE
-        id = :id
-    EOM;
-
-    $stmt = $dbh->prepare($sql);
-
-    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
-    $stmt->bindParam(':due_date', $due_date, PDO::PARAM_STR);
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-    $stmt->execute();
-}
-
 //学習登録
 function insertBt($title, $due_date)
 {
@@ -165,19 +143,6 @@ function insertBt($title, $due_date)
     $stmt->bindParam(':title', $title, PDO::PARAM_STR);
     $stmt->bindParam(':due_date', $due_date, PDO::PARAM_STR);
     $stmt->execute();
-}
-// エラーメッセージ作成
-function createErrMsg($errors)
-{
-    $err_msg = "<ul class=\"errors\">\n";
-
-    foreach ($errors as $error) {
-        $err_msg .= "<li>" . h($error) . "</li>\n";
-    }
-
-    $err_msg .= "</ul>\n";
-
-    return $err_msg;
 }
 // 受け取った id のレコードを取得
 function findById($id)
@@ -206,6 +171,66 @@ function findById($id)
     // 結果の取得
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
+function updatePlanDoneCancel($id)
+{  // データベースに接続
+    $dbh = connectDb();
+    // $id を使用してデータを更新
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET
+        completion_date = NULL
+    WHERE
+        id = :id
+    EOM;
+
+    // プリペアドステートメントの準備
+    $stmt = $dbh->prepare($sql);
+
+    // パラメータのバインド
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    // プリペアドステートメントの実行
+    $stmt->execute();
+}
+//タスク更新
+function updatePlan($id, $title, $due_date)
+{
+    $dbh = connectDb();
+
+    $sql = <<<EOM
+    UPDATE
+        plans
+    SET 
+        title = :title,
+        due_date = :due_date
+    WHERE
+        id = :id
+    EOM;
+
+    $stmt = $dbh->prepare($sql);
+
+    $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+    $stmt->bindParam(':due_date', $due_date, PDO::PARAM_STR);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    $stmt->execute();
+}
+
+// エラーメッセージ作成
+function createErrMsg($errors)
+{
+    $err_msg = "<ul class=\"errors\">\n";
+
+    foreach ($errors as $error) {
+        $err_msg .= "<li>" . h($error) . "</li>\n";
+    }
+
+    $err_msg .= "</ul>\n";
+
+    return $err_msg;
+}
+
 //タスク削除
 function deletePlan($id)
 {
@@ -238,28 +263,6 @@ function updatePlanDone($id)
         plans
     SET
         completion_date = NOW()
-    WHERE
-        id = :id
-    EOM;
-
-    // プリペアドステートメントの準備
-    $stmt = $dbh->prepare($sql);
-
-    // パラメータのバインド
-    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-
-    // プリペアドステートメントの実行
-    $stmt->execute();
-}
-function updatePlanDoneCancel($id)
-{  // データベースに接続
-    $dbh = connectDb();
-    // $id を使用してデータを更新
-    $sql = <<<EOM
-    UPDATE
-        plans
-    SET
-        completion_date = NULL
     WHERE
         id = :id
     EOM;

@@ -1,32 +1,25 @@
 <?php
 require_once __DIR__ . '/functions.php';
-require_once __DIR__ . '/config.php';
-//初期化
-$title = '';
-$due_date = '';
+
 // エラーチェック用の配列
 $errors = [];
-$errors_required = [];
 
-// リクエストメソッドの判定
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // フォームに入力されたデータの受け取り
     $title = filter_input(INPUT_POST, 'title');
     $due_date = filter_input(INPUT_POST, 'due_date');
 
     // バリデーション
-    $errors_required = validateRequired($title, $due_date);
-
-
-    // エラーメッセージの配列をマージ
-    $errors = array_merge($errors_required);
-
+    $errors = validateRequired($title, $due_date);
     if (empty($errors)) {
         insertBt($title, $due_date);
+
+        header('Location: index.php');
+        exit;
     }
 }
-$comps = findCompletion_Date(TASK_COMPLETION_DEU_DATE);
-$letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
+$comps = findCompletion_Date();
+$letions = findCompletion();
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -50,7 +43,6 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
         </div>
         <div class="incomplete-area">
             <h2 class="sub-title">未達成</h2>
-            <hr>
             <table class="plan-list">
                 <thead>
                     <tr>
@@ -64,16 +56,11 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
                 <tbody>
                     <?php foreach ($comps as $comp) : ?>
                         <tr>
-                            <th class="plan-title"><?= h($comp['title']) ?></th>
-                            <?php $ym = date('Y-m-d');
-                            if ($ym >= ($comp['due_date'])) : ?>
-                                <th class="expired"><?= h(date('Y/m/d', strtotime($comp['due_date']))) ?></th>
-                            <?php else : ?>
-                                <th class="plan-due-date"><?= h(date('Y/m/d', strtotime($comp['due_date']))) ?></th>
-                            <?php endif ?>
-                            <th><a href="done.php?id=<?= h($comp['id']) ?>" class="btn done-btn">完了</a></th>
-                            <th><a href="edit.php?id=<?= h($comp['id']) ?>" class="btn edit-btn">編集</a></th>
-                            <th><a href="delete.php?id=<?= h($comp['id']) ?>" class="btn delete-btn">削除</a></th>
+                            <td><?= h($comp['title']) ?></td>
+                            <td <?= daTeRed($comp['due_date']) ?>><?= date('Y/m/d', strtotime(h($comp['due_date']))) ?></td>
+                            <td><a href="done.php?id=<?= h($comp['id']) ?>" class="btn done-btn">完了</a></td>
+                            <td><a href="edit.php?id=<?= h($comp['id']) ?>" class="btn edit-btn">編集</a></td>
+                            <td><a href="delete.php?id=<?= h($comp['id']) ?>" class="btn delete-btn">削除</a></td>
                         </tr>
                     <?php endforeach; ?>
 
@@ -84,7 +71,6 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
         </div>
         <div class="complete-area">
             <h2 class="sub-title">完了</h2>
-            <hr>
             <table class="plan-list">
                 <thead>
                     <tr>
@@ -98,11 +84,11 @@ $letions = findCompLetion(TASK_COMPLETION_DATE_ISNOTNULL);
                 <tbody>
                     <?php foreach ($letions as $letion) : ?>
                         <tr>
-                            <th class="plan-title"><?= h($letion['title']) ?></th>
-                            <th class="plan-completion-date"><?= h(date('Y/m/d', strtotime($letion['completion_date']))) ?></th>
-                            <th class="done-link-area"><a href="done_cancel.php?id=<?= h($letion['id']) ?>" class="btn cancel-btn">未完了</a></th>
-                            <th class="edit-link-area"><a href="edit.php?id=<?= h($letion['id']) ?>" class="btn cancel-edit-btn">編集</a></th>
-                            <th class="delete-link-area"><a href="delete.php?id=<?= h($letion['id']) ?>" class="btn cancel-delete-btn">削除</a></th>
+                            <td><?= h($letion['title']) ?></td>
+                            <td><?= h(date('Y/m/d', strtotime($letion['completion_date']))) ?></td>
+                            <td><a href="done_cancel.php?id=<?= h($letion['id']) ?>" class="btn cancel-btn">未完了</a></td>
+                            <td><a href="edit.php?id=<?= h($letion['id']) ?>" class="btn edit-btn">編集</a></td>
+                            <td><a href="delete.php?id=<?= h($letion['id']) ?>" class="btn delete-btn">削除</a></td>
                         </tr>
                     <?php endforeach; ?>
                         <!-- 完了済のデータを表示 -->
