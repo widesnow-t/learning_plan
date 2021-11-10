@@ -49,7 +49,7 @@ function findCompletion_Date()
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
-function daTeRed($due_date)
+function dateRed($due_date)
 {
     $ym = '';
     if (date('Y-m-d') >= $due_date) {

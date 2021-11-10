@@ -57,7 +57,7 @@ $letions = findCompletion();
                     <?php foreach ($comps as $comp) : ?>
                         <tr>
                             <td><?= h($comp['title']) ?></td>
-                            <td <?= daTeRed($comp['due_date']) ?>><?= date('Y/m/d', strtotime(h($comp['due_date']))) ?></td>
+                            <td <?= dateRed($comp['due_date']) ?>><?= date('Y/m/d', strtotime(h($comp['due_date']))) ?></td>
                             <td><a href="done.php?id=<?= h($comp['id']) ?>" class="btn done-btn">完了</a></td>
                             <td><a href="edit.php?id=<?= h($comp['id']) ?>" class="btn edit-btn">編集</a></td>
                             <td><a href="delete.php?id=<?= h($comp['id']) ?>" class="btn delete-btn">削除</a></td>
@@ -75,7 +75,7 @@ $letions = findCompletion();
                 <thead>
                     <tr>
                         <th class="plan-title">学習内容</th>
-                        <th class="plan-completion-date">完了日 </th>
+                        <th class="plan-completion-date">完了日</th>
                         <th class="done-link-area"></th>
                         <th class="edit-link-area"></th>
                         <th class="delete-link-area"></th>
