@@ -8,15 +8,24 @@ html {
 body {
     font-family: 'M PLUS Rounded 1c', sans-serif;
     min-height: 100vh;
-    background:linear-gradient(#0509ff,#0cd5e7);
+    background:linear-gradient(#5638da 30%, #3da8f0 70%);
 }
 .title {
     text-align: center;
-    margin-bottom: 30px;
     color: mintcream;
+    margin-bottom: 20px;
+}
+.sub-title{
+    text-align: center;
+    padding-bottom: 10px;
+    margin-bottom: 10px;
+    letter-spacing: 1rem;
+    border-bottom: 1px solid;
 }
 .wrapper {
     width: 100%;
+    margin: 0 auto;
+    padding: 50px 4%;
 }
 .errors {
     color: red;
@@ -31,83 +40,68 @@ body {
 -----------------------------------*/
 .form-area {
     background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
+    padding: 2% 5%;
+    margin-bottom: 10px;
     border-radius:10px;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="date"] {
     border: 1px solid #b8b4b4;
     border-radius: 3px;
     width: 100%;
-    padding: 10px;
+    padding: 5px;
+    margin-bottom: 10px;
 }
-input[type="date"]{
-    border: 1px solid #b8b4b4;
-    border-radius: 3px;
-    width: 100%;
-    padding: 10px;
-}
+
+
 /*ボタン*/
 .submit-btn{
-    background-color: #eb43d5;
-    width: 100%;
-    margin-top: 20px;
-    padding: 5px 0;
+    background-color: #f200ff;
+    margin-top: 10px;
     letter-spacing: 1.5rem;
     text-indent: 1.5rem;
-    border-radius:10px;
+    font-size: 1.2rem;
 }
 .addition-btn{
-    background-color: #4362eb;
-    display: block;
-    width: 100%;
-    margin-top: 20px;
-    padding: 5px 0;
+    background-color: #0000ed;
     letter-spacing: 1.5rem;
     text-indent: 1.5rem;
-    border-radius:10px;
-    text-decoration: none;
+    font-size: 1.2rem;
+    margin-top: 10px;
 }
 .btn {
+    display: block;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
     color: #fff;
     border-radius: 5px;
     text-align: center;
-}
-.btn:hover {
-    background-color:#93d8d0;
-}
-.done-btn,
-.edit-btn,
-.delete-btn,
-.cancel-btn {
-    width: 120%;
-    font-size: 0.9rem;
-    margin-right: 3px;
-    padding: 8px;
     text-decoration: none;
 }
+.btn:hover {
+    opacity: 0.5;
+}
 .done-btn {
-    background-color: #292ccd;
+    background-color: #0047e1;
 }
 .edit-btn {
-    background-color: rgb(47, 147, 240);
+    background-color: #ef7800;
 }
 .delete-btn {
-    background-color: #f96262;
+    background-color: #f24343;
 }
 .cancel-btn{
-    background-color: rgb(47, 240, 73);
+    background-color: #00d400;
 }
+
 /*未達成*/
-.incomplete-area {
+.incomplete-area,
+.complete-area {
     background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
+    padding: 2% 5%;
+    margin-bottom: 10px;
     border-radius:10px;
 }
 .sub-title {
@@ -116,19 +110,32 @@ input[type="date"]{
 }
 .plan-list {
     width: 100%;
-    border-collapse: separate;
-    border: none;
-    border-spacing: 10px;
+}
+.plan-list tr {
+    height: 40px;
+}
+.plan-list td {
+    word-break: break-all;
+}
+.plan-title {
+    text-align: left;
+}
+.plan-due-date,
+.plan-completion-date {
+    text-align: left;
+    width: 150px;
+}
+.done-link-area,
+.edit-link-area,
+.delete-link-area {
+    width: 80px;
 }
 .expired {
     color: red;
 }
-/*完了*/
-.complete-area {
-    background-color: #ebf0f1;
-    padding: 40px;
-    margin-bottom: 50px;
-    width: 90%;
-    margin: 30px;
-    border-radius:10px;
+@media (max-width: 600px) {
+    .wrapper{
+        width: 100%;
+        margin: 0 auto;
+    }
 }
